@@ -48,7 +48,7 @@ class fl_pinit {
 		if ( !is_null( $image_width ) ) {
 			$image_width = "data-pin-scale-width=\"$image_width\">";
 		}
-		return "<a data-pin-do='embedBoard' href='http://pinterest.com/pinterest/$board/' $board_width $board_height $image_width></a>";
+		return "<a data-pin-do='embedBoard' href='http://pinterest.com/$board' $board_width $board_height $image_width></a>";
 	}
 
 }
