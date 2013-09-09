@@ -16,30 +16,41 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 */
 
-add_shortcode('pinit', 'fl_pinit_render');
-wp_enqueue_script( 'fl_pin', plugins_url() . "/fl_pinit/js/pin.js", array('jquery') );
 
-/**
-*
-* Render the shortcode
-*
-* @param array $atts shortcode attributes
-*/
-function fl_pinit_render($atts) {
-	extract( shortcode_atts ( array(
-			'board' => 'pinterest',
-			'board_width' => NULL,
-			'board_height' => NULL,
-			'image_width' => NUll
-		), $atts ) );
-	if ( !is_null( $board_width ) ) {
-		$board_width = "data-pin-board-width=\"$board_width\">";
+
+class fl_pinit {
+
+	public function __construct () {
+		wp_enqueue_script( 'fl_pin', plugins_url() . "/fl_pinit/js/pin.js", array('jquery') );
+		add_shortcode('pinit', array(&$this, 'fl_pinit_render'));
 	}
-	if ( !is_null( $board_height ) ) {
-		$board_height = "data-pin-scale-height=\"$board_height\">";
+
+
+	/**
+	*
+	* Render the shortcode
+	*
+	* @param array $atts shortcode attributes
+	*/
+	public function fl_pinit_render($atts) {
+		extract( shortcode_atts ( array(
+				'board' => 'pinterest',
+				'board_width' => NULL,
+				'board_height' => NULL,
+				'image_width' => NUll
+			), $atts ) );
+		if ( !is_null( $board_width ) ) {
+			$board_width = "data-pin-board-width=\"$board_width\">";
+		}
+		if ( !is_null( $board_height ) ) {
+			$board_height = "data-pin-scale-height=\"$board_height\">";
+		}
+		if ( !is_null( $image_width ) ) {
+			$image_width = "data-pin-scale-width=\"$image_width\">";
+		}
+		return "<a data-pin-do='embedBoard' href='http://pinterest.com/pinterest/$board/' $board_width $board_height $image_width></a>";
 	}
-	if ( !is_null( $image_width ) ) {
-		$image_width = "data-pin-scale-width=\"$image_width\">";
-	}
-	return "<a data-pin-do='embedBoard' href='http://pinterest.com/pinterest/$board/' $board_width $board_height $image_width></a>";
+
 }
+
+$fl_pinit = new fl_pinit();
