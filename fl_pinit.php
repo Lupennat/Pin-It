@@ -40,13 +40,13 @@ class fl_pinit {
 				'image_width' => NUll
 			), $atts ) );
 		if ( !is_null( $board_width ) ) {
-			$board_width = "data-pin-board-width=\"$board_width\">";
+			$board_width = "data-pin-board-width='$board_width'";
 		}
 		if ( !is_null( $board_height ) ) {
-			$board_height = "data-pin-scale-height=\"$board_height\">";
+			$board_height = "data-pin-scale-height='$board_height'";
 		}
 		if ( !is_null( $image_width ) ) {
-			$image_width = "data-pin-scale-width=\"$image_width\">";
+			$image_width = "data-pin-scale-width='$image_width'";
 		}
 		return "<a data-pin-do='embedBoard' href='http://pinterest.com/$board' $board_width $board_height $image_width></a>";
 	}
